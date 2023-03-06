@@ -21,6 +21,26 @@ def generate_password():
     pyperclip.copy(password)
 
 
+# ---------------------------- SEARCH DATA FOR WEBSITE ------------------------------- #
+def search_data():
+    website = website_input.get()
+    with open("data.json", "r") as previous_file:
+        previous_data = json.load(previous_file)
+        try:
+            website_data = previous_data[website.capitalize()]
+        except KeyError:
+            messagebox.showinfo(title=f"No data for {website.capitalize()}'s website ",
+                                message=f"No details registered for the website {website.capitalize()}."
+                                        f"\nEnter an email and a password then register it")
+        else:
+            messagebox.showinfo(title=f"Data for {website.capitalize()}'s website ",
+                                message="These are the details previously registered: "
+                                        f"\nEmail: {website_data['email']}"
+                                        f"\nPassword: {website_data['password']}")
+
+
+
+
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def save_password():
     website = website_input.get()
@@ -90,6 +110,8 @@ password_input = Entry(width=32)
 password_input.grid(row=3, column=1, sticky="W")
 
 # buttons
+search_button = Button(text="Search", width=15, command=search_data)
+search_button.grid(row=1, column=2, sticky="E")
 generate_button = Button(text="Generate Password", width=15, command=generate_password)
 generate_button.grid(row=3, column=2, sticky="EW")
 add_button = Button(text="Add", width=36, command=save_password)

@@ -24,8 +24,13 @@ def generate_password():
 # ---------------------------- SEARCH DATA FOR WEBSITE ------------------------------- #
 def search_data():
     website = website_input.get()
-    with open("data.json", "r") as previous_file:
-        previous_data = json.load(previous_file)
+    try:
+        with open("data.json", "r") as previous_file:
+            previous_data = json.load(previous_file)
+    except FileNotFoundError:
+        messagebox.showinfo(title=f"No information recorded ",
+                           message="You have not yet saved any data with our password generator. Try it")
+    else:
         try:
             website_data = previous_data[website.capitalize()]
         except KeyError:

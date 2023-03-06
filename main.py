@@ -23,7 +23,7 @@ def generate_password():
 
 # ---------------------------- SEARCH PASSWORD FOR WEBSITE ------------------------------- #
 def search_password():
-    website = website_input.get()
+    website = website_input.get().capitalize()
     try:
         with open("data.json", "r") as previous_file:
             previous_data = json.load(previous_file)
@@ -32,13 +32,13 @@ def search_password():
                             message="You have not yet saved any data with our program. Try it")
     else:
         try:
-            website_data = previous_data[website.capitalize()]
+            website_data = previous_data[website]
         except KeyError:
-            messagebox.showinfo(title=f"No data for {website.capitalize()}'s website ",
-                                message=f"No details registered for the website {website.capitalize()}."
+            messagebox.showinfo(title=f"No data for {website}'s website ",
+                                message=f"No details registered for the website: {website}."
                                         f"\nEnter an email and a password then register it")
         else:
-            messagebox.showinfo(title=f"Data for {website.capitalize()}'s website ",
+            messagebox.showinfo(title=f"Data for {website}'s website ",
                                 message="These are the details previously registered: "
                                         f"\nEmail: {website_data['email']}"
                                         f"\nPassword: {website_data['password']}")

@@ -21,15 +21,15 @@ def generate_password():
     pyperclip.copy(password)
 
 
-# ---------------------------- SEARCH DATA FOR WEBSITE ------------------------------- #
-def search_data():
+# ---------------------------- SEARCH PASSWORD FOR WEBSITE ------------------------------- #
+def search_password():
     website = website_input.get()
     try:
         with open("data.json", "r") as previous_file:
             previous_data = json.load(previous_file)
     except FileNotFoundError:
         messagebox.showinfo(title=f"No information recorded ",
-                           message="You have not yet saved any data with our password generator. Try it")
+                            message="You have not yet saved any data with our program. Try it")
     else:
         try:
             website_data = previous_data[website.capitalize()]
@@ -42,8 +42,6 @@ def search_data():
                                 message="These are the details previously registered: "
                                         f"\nEmail: {website_data['email']}"
                                         f"\nPassword: {website_data['password']}")
-
-
 
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
@@ -63,9 +61,9 @@ def save_password():
 
     else:
         user_is_ok = messagebox.askokcancel(title=website, message=f"These are the details entered: "
-                                                      f"\nEmail: {email} "
-                                                      f"\nPassword: {password} "
-                                                      f"\nIs it ok to save?")
+                                                                   f"\nEmail: {email} "
+                                                                   f"\nPassword: {password} "
+                                                                   f"\nIs it ok to save?")
         if user_is_ok:
             try:
                 with open("data.json", "r") as previous_file:
@@ -105,8 +103,8 @@ password_label = Label(text="Password:")
 password_label.grid(column=0, row=3, padx=5, pady=5)
 
 # entries
-website_input = Entry(width=35)
-website_input.grid(row=1, column=1, columnspan=2, sticky="EW")
+website_input = Entry(width=32)
+website_input.grid(row=1, column=1, sticky="W")
 website_input.focus()
 email_input = Entry(width=35)
 email_input.grid(row=2, column=1, columnspan=2, sticky="EW")
@@ -115,7 +113,7 @@ password_input = Entry(width=32)
 password_input.grid(row=3, column=1, sticky="W")
 
 # buttons
-search_button = Button(text="Search", width=15, command=search_data)
+search_button = Button(text="Search", width=15, command=search_password)
 search_button.grid(row=1, column=2, sticky="E")
 generate_button = Button(text="Generate Password", width=15, command=generate_password)
 generate_button.grid(row=3, column=2, sticky="EW")

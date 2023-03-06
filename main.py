@@ -42,8 +42,11 @@ def save_password():
                                                       f"\nPassword: {password} "
                                                       f"\nIs it ok to save?")
         if user_is_ok:
+            with open("data.json", "r") as previous_file:
+                previous_data = json.load(previous_file)
+                previous_data.update(new_data)
             with open("data.json", mode="w") as data_file:
-                json.dump(new_data, data_file)
+                json.dump(previous_data, data_file, indent=4)
                 website_input.delete(0, END)
                 password_input.delete(0, END)
 

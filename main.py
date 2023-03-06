@@ -42,11 +42,21 @@ def save_password():
                                                       f"\nPassword: {password} "
                                                       f"\nIs it ok to save?")
         if user_is_ok:
-            with open("data.json", "r") as previous_file:
-                previous_data = json.load(previous_file)
+            try:
+                with open("data.json", "r") as previous_file:
+                    # reading ald data
+                    previous_data = json.load(previous_file)
+            except FileNotFoundError as error_message:
+                # create the file bcs it doesn't exit and writing data inside
+                with open("data.json", "w") as data_file:
+                    json.dump(new_data, data_file, indent=4)
+            else:
+                # everything went well, the program can go on, after line 48
+                # updating ald data with new data (not appending) --> inside the same dictionary
                 previous_data.update(new_data)
-            with open("data.json", mode="w") as data_file:
-                json.dump(previous_data, data_file, indent=4)
+                with open("data.json", "w") as data_file:
+                    json.dump(previous_data, data_file, indent=4)
+            finally:
                 website_input.delete(0, END)
                 password_input.delete(0, END)
 

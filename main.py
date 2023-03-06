@@ -28,20 +28,22 @@ def search_password():
         with open("data.json", "r") as previous_file:
             previous_data = json.load(previous_file)
     except FileNotFoundError:
-        messagebox.showinfo(title=f"No information recorded ",
+        messagebox.showinfo(title=f"No Data file found",
                             message="You have not yet saved any data with our program. Try it")
     else:
-        try:
-            website_data = previous_data[website]
-        except KeyError:
-            messagebox.showinfo(title=f"No data for {website}'s website ",
-                                message=f"No details registered for the website: {website}."
-                                        f"\nEnter an email and a password then register it")
-        else:
+        if website in previous_data:
+            email = previous_data[website]["email"]
+            password = previous_data[website]["password"]
             messagebox.showinfo(title=f"Data for {website}'s website ",
                                 message="These are the details previously registered: "
-                                        f"\nEmail: {website_data['email']}"
-                                        f"\nPassword: {website_data['password']}")
+                                        f"\nEmail: {email}"
+                                        f"\nPassword: {password}")
+        else:
+            messagebox.showinfo(title=f"No data for {website}'s website ",
+                                message=f"No details registered for the website: {website}."
+                                        f"\nEnter a password and register it.")
+
+
 
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #

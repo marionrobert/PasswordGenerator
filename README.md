@@ -8,7 +8,7 @@ Ce gestionnaire de mots de passe est une application développée en Python avec
 
 - **Générateur de mots de passe (`generate_password()`):** La fonction de génération de mots de passe crée des mots de passe aléatoires avec une combinaison de lettres, de chiffres et de symboles. Les mots de passe générés sont automatiquement copiés dans le presse-papiers pour une utilisation facile. (`pyperclip.copy(password)`)
 - **Recherche de mot de passe (`search_password()`):** Les utilisateurs peuvent rechercher des mots de passe précédemment enregistrés associés à un site Web spécifique.
-- **Enregistrement de mot de passe (`save_password()`):** L'application permet aux utilisateurs d'enregistrer de nouveaux mots de passe avec les informations correspondantes sur le site Web.
+- **Enregistrement/Mise à jour de mot de passe (`save_password()`):** L'application permet aux utilisateurs d'enregistrer un nouveau mot de passe avec les informations correspondantes sur le site Web. Si un mot de passe avait été préalablement enregistré pour le site web alors ils era mis à jour.
 
 ## Utilisation
 
